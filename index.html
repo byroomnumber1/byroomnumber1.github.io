@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByRoomNumber - Infografía de servicios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .nav-link { transition: color 0.3s ease, border-bottom-color 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: #0D9488; border-bottom-color: #0D9488; }
+        .tab-button { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        .tab-button.active { background-color: #0D9488; color: white; border-color: #0D9488; }
+        .tab-button:not(.active):hover { background-color: #F0FDFA; border-color: #99F6E4; color: #0F766E; }
+        .chart-container { position: relative; width: 100%; height: 280px; max-height: 320px; margin-left: auto; margin-right: auto; }
+        @media (min-width: 768px) { .chart-container { height: 300px; max-height: 350px;} }
+        .material-card { background-color: white; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 1rem; margin-bottom: 1.5rem; overflow: hidden; }
+        @media (min-width: 768px) { .material-card { padding: 1.5rem; } }
+        .section-title { font-size: 2.25rem; font-weight: bold; color: #1E293B; text-align: center; margin-bottom: 1rem; }
+        .section-subtitle {
+            font-size: 1.125rem; 
+            color: #475569; 
+            text-align: center; 
+            margin-bottom: 2.5rem; 
+            max-width: 700px; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-teal-600">ByRoomNumber</a>
+            <nav class="hidden md:flex space-x-3 lg:space-x-6">
+                <a href="#sobre-nosotros" class="nav-link text-slate-600 pb-1 border-b-2 border-transparent">Sobre nosotros</a>
+                <a href="#propuesta-valor" class="nav-link text-slate-600 pb-1 border-b-2 border-transparent">Propuesta de valor</a>
+                <a href="#servicios" class="nav-link text-slate-600 pb-1 border-b-2 border-transparent">Servicios</a>
+                <a href="#tecnologia" class="nav-link text-slate-600 pb-1 border-b-2 border-transparent">Tecnología</a>
+                <a href="#beneficios-adicionales" class="nav-link text-slate-600 pb-1 border-b-2 border-transparent">Beneficios</a>
+                <a href="#contacto" class="nav-link text-slate-600 pb-1 border-b-2 border-transparent">Contacto</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-slate-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-xl absolute top-full left-0 right-0 z-40">
+            <a href="#sobre-nosotros" class="block py-3 px-6 text-slate-600 hover:bg-teal-50 mobile-nav-link">Sobre nosotros</a>
+            <a href="#propuesta-valor" class="block py-3 px-6 text-slate-600 hover:bg-teal-50 mobile-nav-link">Propuesta de valor</a>
+            <a href="#servicios" class="block py-3 px-6 text-slate-600 hover:bg-teal-50 mobile-nav-link">Servicios</a>
+            <a href="#tecnologia" class="block py-3 px-6 text-slate-600 hover:bg-teal-50 mobile-nav-link">Tecnología</a>
+            <a href="#beneficios-adicionales" class="block py-3 px-6 text-slate-600 hover:bg-teal-50 mobile-nav-link">Beneficios</a>
+            <a href="#contacto" class="block py-3 px-6 text-slate-600 hover:bg-teal-50 mobile-nav-link">Contacto</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-gradient-to-br from-teal-500 to-cyan-600 text-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">ByRoomNumber</h1>
+                <p class="text-xl md:text-3xl mb-10">Optimizando la experiencia del huésped, potenciando tu hotel.</p>
+                <a href="#servicios" class="bg-white text-teal-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-slate-100 transition duration-300 text-lg">Descubre nuestras soluciones</a>
+            </div>
+        </section>
+
+        <section id="sobre-nosotros" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Quiénes somos</h2>
+                <p class="section-subtitle mx-auto">Innovación al servicio de la hotelería.</p>
+                <div class="max-w-3xl mx-auto text-center text-lg text-slate-600 leading-relaxed">
+                    <p>En ByRoomNumber, somos un equipo apasionado por la tecnología y la hospitalidad. Entendemos los desafíos actuales del sector hotelero: la creciente demanda de personalización, la necesidad de optimizar procesos y el objetivo constante de incrementar ingresos.</p>
+                    <p class="mt-4">Nuestra <strong>misión</strong> es revolucionar la experiencia hotelera tradicional, empezando por el proceso de reserva y check-in. Creemos firmemente que empoderar a los huéspedes para que personalicen su estancia desde antes de su llegada no solo eleva su satisfacción, sino que también abre nuevas vías de ingresos y eficiencias operativas para el hotel.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="propuesta-valor" class="py-16 md:py-24 bg-slate-100">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Nuestra propuesta de valor</h2>
+                <p class="section-subtitle mx-auto">Tu éxito es nuestro compromiso. Aportamos valor a través de tres pilares fundamentales:</p>
+                <div class="grid gap-4 md:grid-cols-3 md:gap-8 text-center">
+                    <div class="material-card">
+                        <div class="text-5xl text-teal-500 mb-4">✨</div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2">Mejora experiencia huésped</h3>
+                        <p class="text-slate-600">Selección de habitación online, eliminando incertidumbres y adaptando la estancia a preferencias individuales para mayor satisfacción y fidelización.</p>
+                    </div>
+                    <div class="material-card">
+                        <div class="text-5xl text-teal-500 mb-4">📈</div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2">Incremento de ingresos</h3>
+                        <p class="text-slate-600 mb-4">Facilitamos estrategias de *upselling* y *cross-selling* de forma intuitiva, ofreciendo mejoras y servicios adicionales en el momento oportuno.</p>
+                        <div class="chart-container my-4 w-full">
+                            <canvas id="ingresosChart"></canvas>
+                        </div>
+                        <p class="text-sm text-slate-500 italic">Visualización conceptual del potencial aumento.</p>
+                    </div>
+                    <div class="material-card">
+                        <div class="text-5xl text-teal-500 mb-4">⚙️</div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2">Optimización operativa</h3>
+                        <p class="text-slate-600">Digitalizamos y agilizamos el check-in, reduciendo tiempos de espera y permitiendo al personal enfocarse en una atención de mayor valor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Nuestros servicios (SaaS B2B)</h2>
+                <p class="section-subtitle mx-auto">Ofrecemos una plataforma robusta y fácil de integrar, diseñada para las necesidades del sector hotelero.</p>
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-6 flex flex-wrap justify-center gap-2 md:gap-3 border-b border-slate-200 pb-4">
+                        <button data-tab="seleccion" class="tab-button active py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Selección online</button>
+                        <button data-tab="precheckin" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Pre-check-in digital</button>
+                        <button data-tab="upselling" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Módulo upselling</button>
+                        <button data-tab="checkout" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Gestión check-out</button>
+                        <button data-tab="backoffice" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Gestión back-office</button>
+                        <button data-tab="cloud-programming" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Diseño y programación en la nube</button>
+                        <button data-tab="graphic-design" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Diseño gráfico y comunicación visual</button>
+                        <button data-tab="led-screens" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Pantallas LED de gran formato</button>
+                        <button data-tab="digital-signage" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Digital signage y análisis de impactos</button>
+                        <button data-tab="person-counting" class="tab-button py-2 px-4 rounded-md border border-slate-300 text-sm md:text-base">Sistemas de conteo de personas</button>
+                    </div>
+
+                    <div id="tab-content" class="material-card p-6 md:p-8 min-h-[300px]">
+                        <div id="seleccion-content" class="tab-pane active">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Selección online de habitación</h3>
+                            <p class="text-slate-600 mb-4">Nuestra solución principal. Permite a los huéspedes, una vez confirmada su reserva (independientemente del canal de origen), visualizar las habitaciones disponibles dentro de su categoría reservada (o superiores con coste adicional) y seleccionar la que mejor se adapte a sus preferencias (ej. piso alto, cerca del ascensor, vistas específicas, etc.).</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Beneficios clave:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Aumento significativo de la satisfacción del huésped.</li>
+                                <li>Diferenciación competitiva para tu hotel.</li>
+                                <li>Oportunidad natural para el *upselling* a habitaciones de categoría superior.</li>
+                                <li>Reducción de solicitudes de cambio de habitación a la llegada.</li>
+                            </ul>
+                        </div>
+                        <div id="precheckin-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Pre-check-in digital y gestión de llegadas</h3>
+                            <p class="text-slate-600 mb-4">Optimiza el proceso de llegada permitiendo a los huéspedes completar gran parte del trámite de check-in de forma online antes de su arribo al hotel. Incluye funcionalidades como pre-registro de datos, gestión de cola de reservas, tarjetas de registro con firma electrónica y notificaciones automáticas.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Beneficios clave:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Reducción drástica de los tiempos de espera en recepción.</li>
+                                <li>Mayor eficiencia para el personal de recepción.</li>
+                                <li>Experiencia de llegada más fluida y moderna para el huésped.</li>
+                                <li>Recopilación de datos de forma anticipada y segura.</li>
+                            </ul>
+                        </div>
+                        <div id="upselling-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Módulo de upselling y cross-selling inteligente</h3>
+                            <p class="text-slate-600 mb-4">Integrado en el proceso de selección de habitación y pre-check-in, este módulo permite al hotel ofrecer de manera personalizada mejoras de habitación, servicios adicionales (desayuno, spa, late check-out, parking, etc.) y paquetes especiales.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Beneficios clave:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Incremento directo de los ingresos por huésped (RevPAR).</li>
+                                <li>Personalización de la oferta según el perfil del huésped.</li>
+                                <li>Mayor visibilidad y venta de los servicios complementarios del hotel.</li>
+                            </ul>
+                        </div>
+                        <div id="checkout-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Gestión de check-out (opcional/complementario)</h3>
+                            <p class="text-slate-600 mb-4">Simplificamos el proceso de salida del huésped, ofreciendo opciones como check-out rápido, programación de check-out y gestión de salidas anticipadas.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Beneficios clave:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Mejora la experiencia final del huésped.</li>
+                                <li>Agiliza la disponibilidad de habitaciones para limpieza y nuevos huéspedes.</li>
+                            </ul>
+                        </div>
+                         <div id="backoffice-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Herramientas de gestión de reservas y disponibilidad (back-office)</h3>
+                            <p class="text-slate-600 mb-4">Herramientas para una gestión más eficiente del inventario de habitaciones desde el panel de control del hotel, como "Hold Rooms", visualización del estado de habitaciones en tiempo real y funcionalidades de gestión de comisiones.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Beneficios clave:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Mayor control y flexibilidad sobre el inventario y la asignación.</li>
+                                <li>Optimización de la relación con agencias de viaje y otros canales de reserva.</li>
+                            </ul>
+                        </div>
+                        <div id="cloud-programming-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Diseño y programación en la nube</h3>
+                            <p class="text-slate-600 mb-4">Servicios especializados en la creación y desarrollo de soluciones basadas en la nube.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Características principales:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Programación, diseño de arquitecturas y desarrollo de APIs para servicios móviles y aplicaciones conectadas.</li>
+                            </ul>
+                        </div>
+                        <div id="graphic-design-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Diseño gráfico y comunicación visual</h3>
+                            <p class="text-slate-600 mb-4">Creamos la identidad visual de tu marca, asegurando una primera impresión impactante y una comunicación coherente en todos los canales.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Servicios destacados:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li><strong>Diseño gráfico y desarrollo de marca:</strong> creación de la forma gráfica que debe servir de primera impresión y condensar los conceptos de empresa.</li>
+                                <li><strong>Desarrollo gráfico:</strong> comunicación completa de la marca alineada con los propósitos del proyecto en el que está englobada; desde un video corporativo hasta publicidad en cartelera gigante.</li>
+                            </ul>
+                        </div>
+                        <div id="led-screens-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Pantallas LED de gran formato y paneles informativos</h3>
+                            <p class="text-slate-600 mb-4">Soluciones de visualización LED de alta calidad para diversas aplicaciones y entornos.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Aplicaciones:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Ocio y cultura</li>
+                                <li>Eventos deportivos</li>
+                                <li>Comercios y servicios</li>
+                                <li>Parking</li>
+                                <li>Información de transporte</li>
+                                <li>Obras</li>
+                                <li>Publicidad</li>
+                                <li>Información medioambiental</li>
+                            </ul>
+                        </div>
+                        <div id="digital-signage-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Digital signage y análisis de impactos</h3>
+                            <p class="text-slate-600 mb-4">Implementación de soluciones de cartelería digital para comunicación dinámica y herramientas de análisis para medir su efectividad.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Componentes:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li><strong>Cartelería digital:</strong> gestión de contenidos visuales dinámicos.</li>
+                                <li><strong>Análisis estadístico de impactos:</strong> medición de la efectividad y el alcance de las campañas de digital signage.</li>
+                            </ul>
+                        </div>
+                        <div id="person-counting-content" class="tab-pane hidden">
+                            <h3 class="text-2xl font-semibold text-teal-600 mb-4">Sistemas de conteo de personas</h3>
+                            <p class="text-slate-600 mb-4">Implementación de tecnologías para el conteo preciso de personas, útil para la gestión de aforos, optimización de flujos y análisis de comportamiento en diversos espacios.</p>
+                            <h4 class="font-semibold text-slate-700 mb-2">Beneficios clave:</h4>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>Gestión eficiente de aforos y cumplimiento normativo.</li>
+                                <li>Optimización de la distribución del personal.</li>
+                                <li>Análisis de patrones de tráfico y comportamiento del cliente.</li>
+                                <li>Mejora de la seguridad y la experiencia del visitante.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tecnologia" class="py-16 md:py-24 bg-slate-100">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Tecnología y plataforma</h2>
+                <p class="section-subtitle mx-auto">Impulsando la innovación con una base tecnológica sólida y confiable.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="material-card">
+                        <div class="text-4xl text-teal-500 mb-3">☁️</div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-1">Modelo SaaS</h3>
+                        <p class="text-sm text-slate-600">Acceso desde cualquier lugar, actualizaciones continuas, sin grandes inversiones en infraestructura.</p>
+                    </div>
+                    <div class="material-card">
+                        <div class="text-4xl text-teal-500 mb-3">🔗</div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-1">Integración sencilla</h3>
+                        <p class="text-sm text-slate-600">Compatibilidad con los principales PMS del mercado para una implementación fluida.</p>
+                    </div>
+                    <div class="material-card">
+                        <div class="text-4xl text-teal-500 mb-3">🖥️</div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-1">Interfaz intuitiva</h3>
+                        <p class="text-sm text-slate-600">Diseño amigable y fácil de usar tanto para el hotelero como para el huésped.</p>
+                    </div>
+                    <div class="material-card">
+                        <div class="text-4xl text-teal-500 mb-3">🛡️</div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-1">Seguridad y fiabilidad</h3>
+                        <p class="text-sm text-slate-600">Altos estándares de seguridad para proteger los datos de tu hotel y tus huéspedes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="beneficios-adicionales" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Beneficios adicionales de elegir ByRoomNumber</h2>
+                <p class="section-subtitle mx-auto">Más allá de la tecnología, somos tu socio estratégico para el éxito.</p>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="material-card">
+                        <h3 class="text-xl font-semibold text-teal-600 mb-3">Colaboración y soporte dedicado</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2">
+                            <li><strong>Implementación y onboarding:</strong> te acompañamos en todo el proceso de puesta en marcha.</li>
+                            <li><strong>Soporte técnico especializado:</strong> asistencia rápida y eficiente para resolver tus dudas.</li>
+                            <li><strong>Consultoría y optimización:</strong> te ayudamos a sacar el máximo partido a nuestras herramientas.</li>
+                        </ul>
+                    </div>
+                    <div class="material-card">
+                        <h3 class="text-xl font-semibold text-teal-600 mb-3">¿Por qué elegirnos?</h3>
+                         <ul class="list-disc list-inside text-slate-600 space-y-2">
+                            <li><strong>Enfoque en la experiencia del huésped:</strong> generamos satisfacción, lealtad y un boca a boca positivo.</li>
+                            <li><strong>Resultados tangibles:</strong> soluciones diseñadas para incrementar ingresos y optimizar operaciones.</li>
+                            <li><strong>Innovación constante:</strong> comprometidos con la evolución continua de nuestra plataforma.</li>
+                            <li><strong>Conocimiento profundo del sector:</strong> entendemos tus necesidades y desafíos específicos.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="py-16 md:py-24 bg-teal-600 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transforma la experiencia en tu hotel</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Estamos listos para mostrarte cómo ByRoomNumber puede marcar una diferencia significativa en tu establecimiento.</p>
+                <div class="space-y-4 md:space-y-0 md:space-x-4">
+                    <a href="mailto:hello@byroomnumber.com" class="bg-white text-teal-600 font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-slate-100 transition duration-300 inline-block">Solicita una demo</a>
+                    <a href="tel:+34000000000" class="border-2 border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-teal-600 transition duration-300 inline-block">Hablemos (tu teléfono)</a>
+                </div>
+                <p class="mt-10 text-teal-100">Plaza Papagaio, s/n, 15002, A Coruña, Galicia, España.</p>
+                <p class="text-teal-100">Email: hello@byroomnumber.com</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span id="currentYear"></span> ByRoomNumber. Todos los derechos reservados.</p>
+            <p class="text-sm">Potenciando la hotelería del futuro.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const targetTab = button.dataset.tab;
+                tabPanes.forEach(pane => {
+                    if (pane.id === `${targetTab}-content`) {
+                        pane.classList.remove('hidden');
+                        pane.classList.add('active');
+                    } else {
+                        pane.classList.add('hidden');
+                        pane.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        const ctxIngresos = document.getElementById('ingresosChart');
+        if (ctxIngresos) {
+            new Chart(ctxIngresos, {
+                type: 'bar',
+                data: {
+                    labels: ['Sin ByRoomNumber', 'Con ByRoomNumber'],
+                    datasets: [{
+                        label: 'Ingresos potenciales por huésped (€)',
+                        data: [100, 135], 
+                        backgroundColor: [
+                            'rgba(156, 163, 175, 0.6)', 
+                            'rgba(20, 184, 166, 0.6)'  
+                        ],
+                        borderColor: [
+                            'rgba(107, 114, 128, 1)',
+                            'rgba(13, 148, 136, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '€' + value;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                },
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    } else {
+                                      return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        const navLinks = document.querySelectorAll('nav a.nav-link, #mobile-menu a.mobile-nav-link');
+        const sections = document.querySelectorAll('main section');
+
+        function changeNavActiveState() {
+            let index = sections.length;
+            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+            
+            navLinks.forEach((link) => link.classList.remove('active'));
+            
+            const activeDesktopLink = document.querySelector(`nav a.nav-link[href="#${sections[index].id}"]`);
+            if (activeDesktopLink) activeDesktopLink.classList.add('active');
+            
+            const activeMobileLink = document.querySelector(`#mobile-menu a.mobile-nav-link[href="#${sections[index].id}"]`);
+             if (activeMobileLink) {
+                document.querySelectorAll('#mobile-menu a.mobile-nav-link').forEach(ml => ml.style.fontWeight = 'normal');
+                activeMobileLink.style.fontWeight = 'bold';
+             }
+        }
+        changeNavActiveState();
+        window.addEventListener('scroll', changeNavActiveState);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
